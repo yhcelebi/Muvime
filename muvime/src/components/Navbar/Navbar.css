@@ -1,0 +1,29 @@
+nav {
+    font-family: Inter;
+    background-color: #fff;
+}
+
+.navbar-brand {
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+ul {
+    font-weight: bold;
+}
+
+#addition {
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.10);    
+}
+
+.wrapper {
+    max-width: 1450px;
+    margin: 0 auto;
+    }
+
+
