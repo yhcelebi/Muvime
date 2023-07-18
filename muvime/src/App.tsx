@@ -7,6 +7,7 @@ import { Card } from './components/Card/Card';
 import { Footer } from './components/Footer/Footer';
 import { MovieCard } from './components/Card/components/MovieCard/MovieCard';
 import { Legacy } from './components/Legacy/Legacy';
+import { Slider } from './components/Slider/Slider';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
       <Navbar/>
       <Header></Header>
       <Introduction></Introduction>
+      <Slider></Slider>
+      <Footer></Footer>
     </div>
   );
 }

@@ -1,0 +1,16 @@
+
+
+.more {
+    display: flex;
+    justify-content: end;
+}
+
+.title {
+    max-width: 1250px;
+    display: flex;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+}
