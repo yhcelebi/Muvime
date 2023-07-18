@@ -2,6 +2,8 @@ import React from "react";
 import "./Navbar.css";
 
 export const Navbar = () => {
+    
+
     return (
         <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
@@ -27,21 +29,18 @@ export const Navbar = () => {
             {/* <form className="d-flex" role="search">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
                 <button className="btn btn-outline-success" type="submit">Search</button>
-            </form> */}
-            <div className="lang">
-                <div className="dropdown">
-                    <button className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    EN
-                    </button>
-                    <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="#">EN</a></li>
-                        <li><a className="dropdown-item" href="#">TR</a></li>
-                        <li><a className="dropdown-item" href="#">ES</a></li>
-                    </ul>
-                    </div>
-                </div>
-            </div>
+            </form> */} 
+        </div>  
         </div>
+        <button className="lang">EN</button>
+        <div className="row name-occup">
+         
+            <div className="name">Serkan Konakçı</div>
+
+            <div className="occupation">FrontEnd Developer</div>
+            
+        </div>
+        <img src="https://avatars.githubusercontent.com/u/98681?v=4" alt="mdo" width="32" height="32" className="rounded-circle pp"></img>
         </nav>
     );
 }

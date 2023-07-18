@@ -13,7 +13,11 @@ function App() {
       <Header></Header>
       <Introduction></Introduction>
       <div className="popular">
-        <h2>What's Popular</h2>
+        <div className="row">
+        <h2 className='col align-items-start'>What's Popular</h2>
+        <h5 className='col align-items-end'>MORE...</h5>
+        </div>
+       
         <div className="row">
           <div className="col-3">
             <Card></Card>
