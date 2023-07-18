@@ -1,0 +1,112 @@
+.movie-card {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 196px;
+  }
+  
+  .movie-card .image-4 {
+    align-self: stretch !important;
+    background-image: url(./image.png) !important;
+    border-radius: 8px !important;
+    height: 293px !important;
+    min-width: 196px !important;
+    position: relative !important;
+    width: unset !important;
+  }
+  
+  .movie-card .seperator {
+    align-self: stretch;
+    height: 20px;
+    min-width: 196px;
+    position: relative;
+  }
+  
+  .movie-card .title {
+    align-self: stretch;
+    color: #545454;
+    font-family: var(--h5-bold-font-family);
+    font-size: var(--h5-bold-font-size);
+    font-style: var(--h5-bold-font-style);
+    font-weight: var(--h5-bold-font-weight);
+    letter-spacing: var(--h5-bold-letter-spacing);
+    line-height: var(--h5-bold-line-height);
+    position: relative;
+    white-space: nowrap;
+  }
+  
+  .movie-card .div {
+    align-self: stretch;
+    height: 10px;
+    min-width: 196px;
+    position: relative;
+  }
+  
+  .movie-card .genre {
+    align-self: stretch;
+    color: #818181;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 18px;
+    position: relative;
+    white-space: nowrap;
+  }
+  
+  .movie-card .seperator-2 {
+    align-self: stretch;
+    height: 5px;
+    min-width: 196px;
+    position: relative;
+  }
+  
+  .movie-card .rating {
+    align-items: flex-start;
+    display: flex;
+    gap: 8px;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .movie-card .time-year {
+    color: #818181;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .movie-card .rate {
+    height: 16px;
+    margin-right: -2px;
+    min-width: 26px;
+    position: relative;
+  }
+  
+  .movie-card .overlap-group {
+    background-color: #000000;
+    border-radius: 3px;
+    height: 16px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .movie-card .element {
+    color: #ffffff;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 8px;
+    font-weight: 700;
+    height: 10px;
+    left: 3px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 3px;
+  }
+  

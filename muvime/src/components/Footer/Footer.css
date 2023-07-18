@@ -1,4 +1,27 @@
-footer {
-    background-color:#032541;
-    color: #fff;;
+.legacy-logo {
+    color: #000;
+font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+}
+
+.rights {
+    color: #545454;
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+}
+
+.py-5 {
+    padding-bottom: 0 !important;
+    margin-top: 20px;
+}
+
+.legacy {
+    padding: 0 !important;
+    margin: 0 !important;
 }

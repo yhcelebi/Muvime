@@ -1,0 +1,73 @@
+.box {
+    max-width: 1450px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .box .legacy-wrapper {
+    border: 0px none;
+    height: 29px;
+    overflow-x: hidden;
+    position: relative;
+    width: 1296px;
+  }
+  
+  .box .legacy {
+    height: 29px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 1300px;
+  }
+  
+  .box .terms {
+    align-items: flex-start;
+    display: flex;
+    gap: 14px;
+    left: 931px;
+    position: absolute;
+    top: 2px;
+    width: fit-content;
+  }
+  
+  .box .text-wrapper {
+    color: #000000;
+    font-family: var(--body-regular-font-family);
+    font-size: var(--body-regular-font-size);
+    font-style: var(--body-regular-font-style);
+    font-weight: var(--body-regular-font-weight);
+    letter-spacing: var(--body-regular-letter-spacing);
+    line-height: var(--body-regular-line-height);
+    margin-top: -1px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .box .h-1 {
+    color: #000000;
+    font-family: "Inter-ExtraBold", Helvetica;
+    font-size: 24px;
+    font-weight: 800;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+  }
+  
+  .box .p {
+    color: #545454;
+    font-family: "Inter-ExtraBold", Helvetica;
+    font-size: 18px;
+    font-weight: 800;
+    left: 120px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 3px;
+  }
+  

@@ -1,0 +1,21 @@
+.box {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.box .footer-wrapper {
+  border: 0px none;
+  height: 250px;
+  width: 1440px;
+}
+
+.box .footer {
+  height: 258px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 1440px;
+}
