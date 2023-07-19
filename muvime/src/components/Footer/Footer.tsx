@@ -3,9 +3,9 @@ import "./Footer.css";
 
 export const Footer = () => {
     return (
-<div className="container">
+<div className="container footer">
   <footer className="py-5">
-    <div className="row">
+    <div className="row footer-top">
       <div className="col-6 col-md-2 mb-3">
         <h5>Section</h5>
         <ul className="nav flex-column">
@@ -41,7 +41,7 @@ export const Footer = () => {
 
       <div className="col-md-5 offset-md-1 mb-3">
         <form>
-          <h5>Subscribe to our newsletter</h5>
+          <h5 className="subscribe align-items-start justify-content-center">Subscribe to our newsletter</h5>
           <p>Monthly digest of what's new and exciting from us.</p>
           <div className="d-flex flex-column flex-sm-row w-100 gap-2">
             <label className="visually-hidden">Email address</label>
@@ -52,13 +52,19 @@ export const Footer = () => {
       </div>
     </div>
 
-    <div className="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top legacy">
-      <p className="rights"><span className="legacy-logo">MUVIME</span> © 2023 Tübitak, Inc. All rights reserved.</p>
-      <ul className="list-unstyled d-flex">
-        <li className="ms-3"><a className="link-body-emphasis" href="#"><svg className="bi" width="24" height="24"><use href="#twitter"></use></svg></a></li>
-        <li className="ms-3"><a className="link-body-emphasis" href="#"><svg className="bi" width="24" height="24"><use href="#instagram"></use></svg></a></li>
-        <li className="ms-3"><a className="link-body-emphasis" href="#"><svg className="bi" width="24" height="24"><use href="#facebook"></use></svg></a></li>
-      </ul>
+    <div className="d-flex flex-column flex-sm-row justify-content-between border-top legacy">
+      <div className="wrap-legacy row">
+        <ul className="legacy-list">
+          <li><p className="rights"><span className="legacy-logo">MUVIME</span> © 2023 Tübitak, Inc. All rights reserved.</p></li>
+          <div className="traits">
+            <li>Terms of Use</li>
+            <li>API Terms of Use</li>
+            <li>Privacy Policy</li>
+          </div>
+        </ul>
+        
+        
+      </div>
     </div>
   </footer>
 </div>
