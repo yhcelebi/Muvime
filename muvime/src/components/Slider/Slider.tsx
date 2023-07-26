@@ -6,14 +6,14 @@ import axios from "axios";
 interface Movie {
   id: number;
   title: string;
-  genres: { name: string }[];
+  genre_ids: { name: string }[];
   vote_average: number;
   release_date: string;
+  poster_path: string;
 }
 
 export const Slider = () => {
   const [movies, setMovies] = useState<Movie[]>([]); // Provide the type annotation for movies
-
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -26,61 +26,41 @@ export const Slider = () => {
 
     axios.request(options)
       .then(function (response) {
-        console.log(response.data);
         setMovies(response.data.results);
+        console.log(response.data.results);
       })
       .catch(function (error) {
         console.error(error);
       });
   }, []);
 
+  const url = movies.slice(0, 6).map((movie) => {
+    return "https://image.tmdb.org/t/p/original" + movie.poster_path;
+  });
+
+  console.log(url[0]);
+
   return (
     <div className="slider-container">
-      <div className="row title">
-        {/* <h2 className="popular">What's Popular</h2>
-        <a href="" className="more">More...</a> */}
-      </div>
       <div className="row align-items-center cards">
-        <MovieCard
-            key={movies[0].id}
-            title={movies[0].title}
-            genre={movies[0].genres[0].name + "/" + movies[0].genres[1].name} // Fixed the typo here
-            rate={movies[0].vote_average}
-            date={movies[0].release_date}
-            className="col-1"
-        />
-        <MovieCard
-            key={movies[1].id}
-            title={movies[1].title}
-            genre={movies[1].genres[0].name + "/" + movies[0].genres[1].name} // Fixed the typo here
-            rate={movies[1].vote_average}
-            date={movies[1].release_date}
-            className="col-1"
-        />
-        <MovieCard
-            key={movies[2].id}
-            title={movies[2].title}
-            genre={movies[2].genres[0].name + "/" + movies[0].genres[1].name} // Fixed the typo here
-            rate={movies[2].vote_average}
-            date={movies[2].release_date}
-            className="col-1"
-        />
-        <MovieCard
-            key={movies[3].id}
-            title={movies[3].title}
-            genre={movies[3].genres[0].name + "/" + movies[0].genres[1].name} // Fixed the typo here
-            rate={movies[3].vote_average}
-            date={movies[3].release_date}
-            className="col-1"
-        />
-        <MovieCard
-            key={movies[4].id}
-            title={movies[4].title}
-            genre={movies[4].genres[0].name + "/" + movies[0].genres[1].name} // Fixed the typo here
-            rate={movies[4].vote_average}
-            date={movies[4].release_date}
-            className="col-1"
-        />
+      {movies.slice(0, 6).map((movie, index) => (
+          // Add a conditional check for poster_path before rendering the MovieCard
+          // This will prevent rendering the MovieCard if poster_path is not available
+          // The nullish coalescing operator ?? ensures that an empty string is used as the fallback
+          movie.poster_path && (
+            <MovieCard
+              key={movie.id}
+              title={movie.title}
+              genre={movie.genre_ids[0]?.name + "/" + movie.genre_ids[1]?.name}
+              rate={movie.vote_average}
+              date={movie.release_date}
+              style={{
+                backgroundImage: `url(${url[index] ?? ''})`
+              }}
+              className="col-1"
+            />
+          )
+        ))}
       </div>
     </div>
   );

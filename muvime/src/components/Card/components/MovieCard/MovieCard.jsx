@@ -2,10 +2,10 @@ import React from "react";
 import { Image } from "../Image/Image.jsx";
 import "./style.css";
 
-export const MovieCard = ( props, {className} ) => {
+export const MovieCard = (props) => {
   return (
-    <div className={`movie-card ${className}`}>
-      <Image className="image-4" />
+    <div className={`movie-card ${props.className}`}>
+      <Image className="image-4" style={props.style} />
       <div className="seperator" />
       <div className="title">{props.title}</div>
       <div className="div" />
