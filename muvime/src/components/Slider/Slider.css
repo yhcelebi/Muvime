@@ -1,14 +1,42 @@
-.more {
-    display: flex;
-    justify-content: end;
-}
-
-.title {
-    max-width: 1250px;
-    display: flex;
-}
-
 .cards {
     display: flex;
     justify-content: center;
+}
+
+.popular-title {
+    color: #555;
+
+    /* Page Title */
+    font-family: Inter;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -1.2px;
+}
+
+.more {
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.40);
+    background: rgba(226, 42, 42, 0.00);
+    display: flex;
+    padding: 6px 12px;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    margin-right: 30px;
+}
+
+.slider-title {
+    max-width: 1450px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.slider-container {
+    max-width: 1550px;
+    margin: 0 auto;
+    margin-bottom: 30px;
 }

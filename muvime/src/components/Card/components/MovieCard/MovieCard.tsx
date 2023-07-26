@@ -1,8 +1,9 @@
-import React from "react";
-import { Image } from "../Image/Image.jsx";
+import React, { useEffect, useState } from "react";
+import { Image } from "../Image/Image";
+import axios from "axios";
 import "./style.css";
 
-export const MovieCard = (props) => {
+export const MovieCard = (props: any) => {
   return (
     <div className={`movie-card ${props.className}`}>
       <Image className="image-4" style={props.style} />
