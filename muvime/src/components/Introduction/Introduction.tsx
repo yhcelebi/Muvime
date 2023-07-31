@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Introduction.css";
 
 export const Introduction = () => {
+
   return (
     <div className="container-fluid wrap">
       <div className="px-4 py-5 my-5 text-center">
-        <a href="" className="premium btn-lg px-4">
+        <a href="/premium" className="premium btn-lg px-4">
           Get Premium
         </a>
         <p className="tmdb-advantage">The TMDB Advantage</p>

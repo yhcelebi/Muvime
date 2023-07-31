@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Slider.css";
 import { MovieCard } from "../Card/components/MovieCard/MovieCard";
 import axios from "axios";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 interface Movie {
   id: number;
@@ -13,26 +14,29 @@ interface Movie {
   poster_path: string;
 }
 
-const ACCCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MTdjYzU4OTAzYzAyZWQ4Y2ZiYjQzZTE0NTE1NjY3NCIsInN1YiI6IjY0YmY3NzkwMDE3NTdmMDExY2E4ODcyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lwtqnzSkXwmE9NpmC_tOG9ZcO7imBaqvK4j843d8xUY";
+const ACCCESS_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MTdjYzU4OTAzYzAyZWQ4Y2ZiYjQzZTE0NTE1NjY3NCIsInN1YiI6IjY0YmY3NzkwMDE3NTdmMDExY2E4ODcyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lwtqnzSkXwmE9NpmC_tOG9ZcO7imBaqvK4j843d8xUY";
+
 let START = 0;
 let END = 6;
 
-export const Slider = (props: any) => {
+export const Slider = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [genres, setGenres] = useState<any[]>([]);
   const [isMore, setIsMore] = useState(false);
   const [runtimes, setRuntimes] = useState<any[]>([]);
 
+  const navigate = useNavigate();
+
   const moreHandler = () => {
     if (isMore === false) {
       setIsMore(true);
       END = 12;
-    }
-    else {
+    } else {
       setIsMore(false);
       END = 6;
     }
-  }
+  };
 
   useEffect(() => {
     const options = {
@@ -110,6 +114,11 @@ export const Slider = (props: any) => {
     fetchRuntimeForMovies();
   }, [runtimeFinder]);
 
+  const handleMovieCardClick = (movieId: number) => {
+    // Use the navigate function to navigate to the movie details page
+    navigate(`/movies/${movieId}`);
+  };
+
   return (
     <div className="slider-container">
       <div className="slider-title flex-row d-flex align-items-center justify-content-between">
@@ -127,17 +136,24 @@ export const Slider = (props: any) => {
 
           return (
             movie.poster_path && (
-              <MovieCard
-                key={movie.id}
-                title={movie.title}
-                genre={movieGenres.join("/")}
-                rate={movie.vote_average}
-                date={`${Math.floor(runtimes[index] / 60)}h ${(runtimes[index] & 60) == 0 ? "" : (runtimes[index] & 60) + "m"} / ` + dayjs(movie.release_date).format("YYYY")}
-                style={{
-                  backgroundImage: `url(${url[index] ?? ""})`,
-                }}
-                className="col-1"
-              />
+              <div className="col-md-2 movie-card-slider" key={movie.id}>
+                {/* Use the onClick event to handle the card click */}
+                <div className="link" onClick={() => handleMovieCardClick(movie.id)}>
+                  <MovieCard
+                    key={movie.id}
+                    title={movie.title}
+                    genre={movieGenres.join("/")}
+                    rate={movie.vote_average}
+                    date={`${Math.floor(runtimes[index] / 60)}h ${
+                      (runtimes[index] & 60) == 0 ? "" : (runtimes[index] & 60) + "m"
+                    } / ` + dayjs(movie.release_date).format("YYYY")}
+                    style={{
+                      backgroundImage: `url(${url[index] ?? ""})`,
+                    }}
+                    className="col-1"
+                  />
+                </div>
+              </div>
             )
           );
         })}

@@ -2,12 +2,10 @@ import React from "react";
 import "./Navbar.css";
 
 export const Navbar = () => {
-    
-
     return (
         <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-            <a className="navbar-brand" href="#">MUVIME</a>
+            <a className="navbar-brand" href="/">MUVIME</a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
@@ -32,7 +30,17 @@ export const Navbar = () => {
             </form> */} 
         </div>  
         </div>
-        <button className="lang">EN</button>
+        <div className="dropdown">
+        <button className="lang dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            EN
+        </button>
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a className="dropdown-item" href="#">TR</a>
+            <a className="dropdown-item" href="#">ES</a>
+            <a className="dropdown-item" href="#">EN</a>
+        </div>
+        </div>
+        
         <div className="row name-occup">
          
             <div className="name">Serkan Konakçı</div>
