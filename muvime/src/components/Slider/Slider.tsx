@@ -5,23 +5,14 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 
-interface Movie {
-  id: number;
-  title: string;
-  genre_ids: { name: string }[];
-  vote_average: number;
-  release_date: string;
-  poster_path: string;
-}
-
-const ACCCESS_TOKEN =
+export const ACCCESS_TOKEN =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MTdjYzU4OTAzYzAyZWQ4Y2ZiYjQzZTE0NTE1NjY3NCIsInN1YiI6IjY0YmY3NzkwMDE3NTdmMDExY2E4ODcyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lwtqnzSkXwmE9NpmC_tOG9ZcO7imBaqvK4j843d8xUY";
 
 let START = 0;
 let END = 6;
 
 export const Slider = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<any[]>([]);
   const [genres, setGenres] = useState<any[]>([]);
   const [isMore, setIsMore] = useState(false);
   const [runtimes, setRuntimes] = useState<any[]>([]);
@@ -129,7 +120,7 @@ export const Slider = () => {
       </div>
       <div className="row align-items-center cards">
         {movies.slice(START, END).map((movie, index) => {
-          const movieGenres = movie.genre_ids.map((genreId) => {
+          const movieGenres = movie.genre_ids.map((genreId: any) => {
             const genre = genres.find((genre) => genre.id === genreId);
             return genre ? genre.name : "";
           });

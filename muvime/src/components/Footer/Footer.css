@@ -49,39 +49,37 @@
 }
 
 .legacy {
+    height: 50px;
     background-color: white;
     align-items: center;
     max-width: 100% !important;
     width: 100% !important;
     padding: 0px !important;
     margin: 0px !important;
-    padding-top: 10px !important;
 }
 
 .wrap-legacy {
-    padding-top: 0px !important;
     max-width: 1350px !important;
     width: 100% !important;
     margin: 0 auto !important;
-    padding: 0px !important;
 }
 
 .legacy-logo {
     color: #000;
-font-family: Inter;
-font-size: 24px;
-font-style: normal;
-font-weight: 800;
-line-height: normal;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
 }
 
 .rights {
     color: #545454;
-font-family: Inter;
-font-size: 18px;
-font-style: normal;
-font-weight: 800;
-line-height: normal;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
 }
 
 .wrap-legacy {
@@ -101,4 +99,20 @@ line-height: normal;
 .traits {
     display: flex;
     align-items: center;
+}
+
+.col-sm-1 {
+    color: #000;
+
+/* body/regular */
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 24px */
+}
+
+.api {
+    max-width: 150px !important;
+    width: 100% !important;
 }
