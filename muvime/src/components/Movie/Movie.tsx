@@ -94,28 +94,26 @@ const Movie = (props: any) => {
       >
         <div className="landing container">
           <div className="row">
-            <div className="col-3">
-              <a
-                href={
-                  "https://image.tmdb.org/t/p/original/" + movie.poster_path
-                }
-              >
-                <img
-                  src={
-                    "https://image.tmdb.org/t/p/original/" + movie.poster_path
-                  }
-                  alt="poster"
-                  className="poster"
-                />
-              </a>
-
-              <div className="row justify-content-center">
-                <div className="col-6">
-                  <button className="btn btn-danger align-self-center watch-now">
-                    Watch Now
-                  </button>
+          <div className="col-3">
+              {/* No Image condition */}
+              {movie.poster_path ? (
+                <a href={"https://image.tmdb.org/t/p/original/" + movie.poster_path}>
+                  <img
+                    src={"https://image.tmdb.org/t/p/original/" + movie.poster_path}
+                    alt="poster"
+                    className="poster"
+                  />
+                </a>
+              ) : (
+                <div className="no-image-container">
+                  <img
+                    src="https://via.placeholder.com/200x300?text=No+Image"
+                    alt="No Poster Available"
+                    className="no-image"
+                  />
                 </div>
-              </div>
+              )}
+              {/* ... (rest of the code) */}
             </div>
             <div className="col-md-6">
               <div className="info">

@@ -114,7 +114,7 @@
   border-radius: 3px;
   height: 16px;
   position: relative;
-  width: 20px;
+  width: 40px;
 }
 
 .movie-card .element {
@@ -128,4 +128,8 @@
   line-height: normal;
   position: absolute;
   top: 3px;
+}
+
+.pagination-container {
+  margin-top: 50px !important;
 }

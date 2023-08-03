@@ -10,6 +10,8 @@ import { BrowserRouter, Route, Routes} from "react-router-dom";
 import { Navbar } from './components/Navbar/Navbar';
 import { Footer } from './components/Footer/Footer';
 import SignUp from './components/SignUp/SignUp';
+import Search from './components/Search/Search';
+import { NotFound } from './components/NotFound/NotFound';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,8 +24,9 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path="/premium" element={<Premium />} />
       <Route path="/movies/:movieId" Component={Movie} />
-      <Route path="*" element={<h1>Not Found</h1>} />
+      <Route path="*" element={<NotFound />} />
       <Route path="signup" element={<SignUp />} />
+      <Route path="/search/:searchTerms" element={<Search />} />
     </Routes>
   </BrowserRouter>
   <Footer />

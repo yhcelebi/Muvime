@@ -1,0 +1,20 @@
+.search-results {
+  color: #555;
+
+  /* Page Title */
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: -1.2px;
+}
+
+.records {
+  border-radius: 3px;
+  background: rgba(226, 42, 42, 0);
+}
+
+.search-wrap {
+    margin-top: 80px;
+}
