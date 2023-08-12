@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Search.css";
 import { Header } from "../Header/Header";
 import { MovieCard } from "../Card/components/MovieCard/MovieCard";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import dayjs from "dayjs";
 
@@ -23,30 +23,33 @@ interface Movie {
 export const ACCCESS_TOKEN =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MTdjYzU4OTAzYzAyZWQ4Y2ZiYjQzZTE0NTE1NjY3NCIsInN1YiI6IjY0YmY3NzkwMDE3NTdmMDExY2E4ODcyYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lwtqnzSkXwmE9NpmC_tOG9ZcO7imBaqvK4j843d8xUY";
 
-const num: number = 12;
 const itemsPerPage: number = 20; // Adjust this value according to your API's pagination settings
 
-const Search = () => {
+export const Search = () => {
   const [genres, setGenres] = useState<Genre[]>([]);
-  const location = useLocation(); // Get the location object from React Router
+  const location = useLocation();
   const searchResults = location.state?.searchResults || [];
   const navigate = useNavigate();
-  const [runtimes, setRuntimes] = useState<number[]>([]);
-  const { searchTerms, page = "1" } = useParams<{ searchTerms: string; page?: string }>();
-  const currentPage = parseInt(page, 10);
+  const [movieRuntimes, setMovieRuntimes] = useState<{ [key: number]: number }>(
+    {}
+  );
+  const { searchTerms, page = "1" } = useParams<{
+    searchTerms: string;
+    page?: string;
+  }>();
+  const currentPage = page ? parseInt(page, 10) : 1;
+  const totalPages: number = Math.ceil(searchResults.length / itemsPerPage);
 
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const responseGenre: AxiosResponse<{ genres: Genre[] }> = await axios.get(
-          "https://api.themoviedb.org/3/genre/movie/list",
-          {
+        const responseGenre: AxiosResponse<{ genres: Genre[] }> =
+          await axios.get("https://api.themoviedb.org/3/genre/movie/list", {
             headers: {
               accept: "application/json",
               Authorization: "Bearer " + ACCCESS_TOKEN,
             },
-          }
-        );
+          });
         const genres = responseGenre.data.genres;
         setGenres(genres);
       } catch (errorGenre: any) {
@@ -67,34 +70,39 @@ const Search = () => {
   });
 
   useEffect(() => {
-    const fetchRuntimeForMovies = async () => {
-      try {
-        if (runtimeFinder.length === 0) return;
+    // Update the ref when searchResults change
+    runtimeFinder.current = runtimeFinder;
+  }, [searchResults]);
 
-        const runtimeRequests = runtimeFinder.map(async (id: number) => {
-          const responseRuntime: AxiosResponse<{ runtime: number }> = await axios.get(
-            `https://api.themoviedb.org/3/movie/${id}`,
-            {
+  useEffect(() => {
+    const fetchRuntimes = async () => {
+      const runtimeData: { [key: number]: number } = {};
+
+      for (const movieId of runtimeFinder) {
+        // Use the pre-defined runtimeFinder array
+        try {
+          const responseRuntime: AxiosResponse<{ runtime: number }> =
+            await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
               headers: {
                 accept: "application/json",
                 Authorization: "Bearer " + ACCCESS_TOKEN,
               },
-            }
+            });
+
+          runtimeData[movieId] = responseRuntime.data.runtime;
+        } catch (errorRuntime: any) {
+          console.error(
+            `Error fetching runtime for movie ${movieId}`,
+            errorRuntime
           );
-
-          console.log("Movie ID:", id);
-          console.log("Response Runtime Data:", responseRuntime.data);
-          return responseRuntime.data.runtime;
-        });
-
-        const runtimes = await Promise.all(runtimeRequests);
-        setRuntimes(runtimes);
-      } catch (errorRuntime: any) {
-        console.error(errorRuntime);
+        }
       }
+
+      setMovieRuntimes(runtimeData);
     };
-    fetchRuntimeForMovies();
-  }, [runtimeFinder]);
+
+    fetchRuntimes();
+  }, [runtimeFinder]); // Update when runtimeFinder changes
 
   const movieGenres = searchResults.map((movie: Movie, index: number) => {
     return movie.genre_ids.map((genreId: number) => {
@@ -108,20 +116,35 @@ const Search = () => {
     navigate(`/movies/${movieId}`);
   };
 
-  // Calculate total number of pages
-  const totalPages = Math.ceil(searchResults.length / itemsPerPage);
+  useEffect(() => {
+    if (currentPage < 1 || currentPage > totalPages) {
+      // Redirect to the first page if page is less than 1
+      // Redirect to the last page if page is greater than totalPages
+      navigate(`/search/${searchTerms}?page=1`);
+    }
+  }, [currentPage, navigate, searchTerms, totalPages]);
 
-  // Filter the movies for the current page
-  const paginatedResults = searchResults.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  // Function to handle navigation to the previous page
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      const prevPage = (currentPage - 1).toString();
+      navigate(`/search/${searchTerms}?page=${prevPage}`);
+    }
+  };
+
+  // Function to handle navigation to the next page
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      const nextPage = (currentPage + 1).toString();
+      navigate(`/search/${searchTerms}?page=${nextPage}`);
+    }
+  };
 
   return (
     <>
       <Header />
       <div className="container search-wrap">
-        <div className="row align-items-center">
+        <div className="row align-items-center results">
           <div className="col-11">
             <h2 className="search-results">Search Results</h2>
           </div>
@@ -129,24 +152,32 @@ const Search = () => {
             <p className="records">{searchResults.length} Records</p>
           </div>
         </div>
-        <div className="row">
-          {paginatedResults.map((movie: Movie, index: number) => {
+        <div className="row search-results-movies">
+          {searchResults.map((movie: Movie, index: number) => {
             return (
-              <div className="col-3" key={movie.id}>
+              <div className="col-1" key={movie.id}>
                 {/* Use the onClick event to handle the card click */}
-                <div className="link" onClick={() => handleMovieCardClick(movie.id)}>
+                <div
+                  className="link"
+                  onClick={() => handleMovieCardClick(movie.id)}
+                >
                   <MovieCard
                     key={movie.id}
                     title={movie.title}
                     genre={movieGenres[index].join("/")}
                     rate={movie.vote_average}
-                    date={`${
-                      typeof runtimes[index] === "number" && !isNaN(runtimes[index])
-                        ? `${Math.floor(runtimes[index] / 60)}h ${
-                            (runtimes[index] & 60) === 0 ? "" : (runtimes[index] & 60) + "m"
-                          }`
-                        : "Unknown"
-                    } / ` + dayjs(movie.release_date).format("YYYY")}
+                    date={
+                      `${
+                        typeof movieRuntimes[movie.id] === "number" &&
+                        !isNaN(movieRuntimes[movie.id])
+                          ? `${Math.floor(movieRuntimes[movie.id] / 60)}h ${
+                              movieRuntimes[movie.id] % 60 === 0
+                                ? ""
+                                : (movieRuntimes[movie.id] % 60) + "m"
+                            }`
+                          : "Unknown"
+                      } / ` + dayjs(movie.release_date).format("YYYY")
+                    }
                     style={{
                       backgroundImage: `url(${url(movie.poster_path)})`,
                     }}
@@ -157,17 +188,52 @@ const Search = () => {
           })}
         </div>
         {/* Pagination Buttons */}
-        <div className="pagination-container row container">
-          {currentPage > 1 && (
-            <button className="pagination-button btn-primary" onClick={() => navigate(`/search/${searchTerms}?page=${currentPage - 1}`)}>
-              Previous
-            </button>
-          )}
-          {currentPage < totalPages && (
-            <button className="pagination-button btn-primary" onClick={() => navigate(`/search/${searchTerms}?page=${currentPage + 1}`)}>
-              Next
-            </button>
-          )}
+        <div className="navigation align-self-center justify-content-center container">
+          <nav aria-label="Page ">
+            <ul className="pagination">
+              <li
+                className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
+              >
+                <a
+                  className="page-link"
+                  href={`/search/${searchTerms}?page=${currentPage - 1}`}
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              {/* Dynamically generate pagination buttons */}
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <li
+                  className={`page-item ${
+                    currentPage === index + 1 ? "active" : ""
+                  }`}
+                  key={index}
+                >
+                  {/* Use the Link component to handle navigation */}
+                  <Link
+                    className="page-link"
+                    to={`/search/${searchTerms}?page=${index + 1}`}
+                  >
+                    {index + 1}
+                  </Link>
+                </li>
+              ))}
+              <li
+                className={`page-item ${
+                  currentPage === totalPages ? "disabled" : ""
+                }`}
+              >
+                <a
+                  className="page-link"
+                  href={`/search/${searchTerms}?page=${currentPage + 1}`}
+                  aria-label="Next"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </>

@@ -3,6 +3,7 @@
     justify-content: center;
     margin: 0;
     padding: 0;
+    flex-wrap: wrap !important;
 }
 
 .popular-title {
@@ -28,17 +29,22 @@
     cursor: pointer;
     text-decoration: none;
     color: #000;
-    margin-right: 30px;
 }
 
 .slider-title {
-    max-width: 1450px;
+    max-width: 1250px;
     margin: 0 auto;
     margin-bottom: 30px;
 }
 
 .slider-container {
-    max-width: 1550px;
+    max-width: 1250px;
     margin: 0 auto;
     margin-bottom: 30px;
+}
+
+.movie-card-slider {
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 0 !important;
 }

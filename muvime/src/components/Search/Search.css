@@ -16,5 +16,35 @@
 }
 
 .search-wrap {
-    margin-top: 80px;
+  margin-top: 80px;
+  max-width: 1450px !important;
+  width: 100% !important;
+}
+
+.navigation {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding-top: 50px !important;
+  margin: 0 auto !important;
+}
+
+.link {
+  padding: 0;
+  margin: 0;
+}
+
+.search-wrap .col-3 {
+  padding: 0;
+  margin: 0;
+}
+
+.search-results-movies {
+  margin: 0 auto;
+  max-width: 1450px !important;
+  width: 100% !important;
+}
+
+.results {
+  max-width: 1366px !important;
 }

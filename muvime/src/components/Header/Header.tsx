@@ -48,7 +48,7 @@ export const Header = () => {
         clearTimeout(timer);
       };
     }
-  }, [searchTerm]);
+  }, [searchTerm]); // Add searchTerm as a dependency here
 
   const handleChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -56,17 +56,22 @@ export const Header = () => {
 
   const handleKeyPress = (event: any) => {
     if (event.key === "Enter") {
-      // When Enter key is pressed, change the route
       handleSearch();
     }
   };
 
   const handleSearch = async () => {
-    // Do the search or any other actions here
-    // For now, just change the route to "/search" with the search results data as state
+    // Step 1: Fetch movies based on the search term
     const response = await fetchMoviesBySearchTerm(searchTerm);
-    const searchResults = response?.results || []; // Access 'results' directly from the response
-    navigate(`/search/${queryReqSaved}`, { state: { searchResults } });
+    const searchResults = response?.results || [];
+  
+    // Step 2: Update the queryReqSaved variable
+    queryReqSaved = searchTerm;
+  
+    // Step 3: Navigate to the search results page
+    navigate(`/search/${encodeURIComponent(queryReqSaved)}?page=1`, {
+      state: { searchResults },
+    });
   };
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import "./SignUp.css";
 
-const SignUp = () => {
+export const SignUp = () => {
   return (
     <body className="d-flex align-self-center py-5 bg-body-white justify-content-center">
       <div className="w-400">
